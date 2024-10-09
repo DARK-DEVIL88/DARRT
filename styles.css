@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #fff;
+}
+
+header {
+    background-color: #FF9900;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+section  {
+    background-color: #FF9900;
+    padding: 20px;
+    border: 1px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+button {
+    background-color: #FF9900;
+    color: #333;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FFCC00;
+    border: 2px solid #FF9900;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.terms{
+    background-color: #444;
+    color: #fff;
+    padding: 2px;
+    margin: 30px;
+    border-radius: 10px;
+    flex: 1; /* Allow both containers to grow equally */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+ .instructions {
+    background-color: #444;
+    color: #fff;
+    padding: 2px;
+    margin: 30px;
+    border-radius: 10px;
+    flex: 1; /* Allow both containers to grow equally */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* For desktop devices */
+@media (min-width: 768px) {
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+    }
+    .terms, .instructions {
+        flex-basis: 55%; /* Set the width of each container to 45% */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column; /* Stack the containers vertically */
+    }
+    .terms, .instructions {
+        flex-basis: 100%; /* Set the width of each container to 100% */
+        margin-bottom: 20px; /* Add margin between containers */
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 9px;
+    background-color: #FF9900;
+    color: #333;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}  
+.download-section {
+    background-color: #FF9900;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: -60px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.download-button {
+    display: inline-block;
+    background-color: #333;
+    color: #FF9900;
+    padding: 5px 0px;
+    border: 2px solid #FF9900;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.download-button:hover {
+    background-color: #FFCC00;
+    color: #333;
+}

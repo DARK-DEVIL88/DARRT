@@ -3,154 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darrt</title>
-    <link rel="stylesheet" href="styles.css">  
+    <title>Image Button Example</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: #fff;
-            border: 2px solid #FF9900;
-            animation: border-animation 2s infinite;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            color: white;
         }
 
-        @keyframes border-animation {
-            0% {
-                border-color: #FF9900;
-            }
-            50% {
-                border-color: #333;
-            }
-            100% {
-                border-color: #FF9900;
-            }
-        }   
-
-        
-        .terms, .instructions {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: #fff;
-            border: 2px solid #FF9900;
-            animation: border-animation 2s infinite;
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        @keyframes border-animation {
-            0% {
-                border-color: #FF9900;
-            }
-            50% {
-                border-color: #333;
-            }
-            100% {
-                border-color: #FF9900;
-            }
-        }  
-
-          {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: #fff;
-            border: 9px solid #050404;
-            animation: border-animation 2s infinite;
+        .image-button {
+            background: linear-gradient(to bottom right, black, red);
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        @keyframes border-animation {
-            0% {
-                border-color: #080500;
-            }
-            50% {
-                border-color: #d06b12;
-            }
-            100% {
-                border-color: #060400;
-            }
-        }  
+        .image-button img {
+            width: 20%;
+            height: 30%;
+            border-radius: 10px;
+        }
 
-        
-    
+        .image-button:hover {
+            transform: scale(1.05);
+        }
+
+        .image-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="#">Tournaments</a></li>
-                <li><a href="#">Leaderboard</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h1>Welcome to Darrt!</h1>
-            <p>Play games, win cash, and have fun!</p>
-            <button>Play Now</button>  
-             <a href="Darrt.apk" class="download-button">Download APK</a>
-        </section>
-
-        <div class="container">
-            <div class="terms">
-                <h2>Terms and Conditions</h2>
-               
-                <p>Welcome to Darrt! These terms and conditions outline the rules and regulations for the use of Darrt's website and services.</p>
-                
-                <h3>1. Acceptance of Terms</h3>
-                <p>By accessing this website, you accept these terms and conditions in full. If you disagree with any part of these terms, you must not use our website.</p>
-
-                <h3>2. Eligibility</h3>
-                <p>You must be at least 18 years of age to use this site. By using this site, you represent that you are at least 18 years old.</p>
-
-                <h3>3. User Accounts</h3>
-                <p>To access certain features of the site, you may be required to create an account. You are responsible for maintaining the confidentiality of your account information.</p>
-
-                <h3>4. User Conduct</h3>
-                <p>You agree to use the site only for lawful purposes and in a manner that does not infringe the rights of or restrict the use of this site by any third party.</p>
-
-                <h3>5. Intellectual Property</h3>
-                <p>All content on this site, including text, graphics, logos, and software, is the property of Darrt or its licensors and is protected by copyright and intellectual property laws.</p>
-
-                <h3>6. Limitation of Liability</h3>
-                <p>In no event shall Darrt be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of the site.</p>
-
-                <h3>7. Changes to Terms</h3>
-                <p>We may update these terms from time to time. You are advised to review these terms periodically for any changes.</p>
-
-                <h3>8. Governing Law</h3>
-                <p>These terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction].</p>
-            
-
-            </div>
-
-            <div class="instructions">
-                <h2>Instructions</h2>
-                
-                <p>Here are the instructions to get started:</p>
-                <ul>
-                    <li>WinZO offers skill-based games and formats, ensuring fairness and safety.</li>
-                    <li>As a member of IEIC, WinZO guarantees the integrity of all games on the platform.</li>
-                    <li>Trusted payment partners like PayTM, Google Pay, PhonePe, and BHIM are available for secure transactions.</li>
-                    <li>Fraudulent play is restricted through advanced fraud detection mechanisms.</li>
-                    <li>The WinZO app is accessible on Android and iOS.</li>
-                    <li>Android users can download it from the Download Button on this page, while                    <li>iOS users can find it on the Apple App Store.</li>
-                    <li>Play 100+ exciting games in 12 different languages.</li>
-                    <li>Withdraw your winnings instantly with a single click using UPI, Paytm, and other methods.</li>
-                    <li>Join the best gaming platform with over 20 million live players all over India.</li>
-                </ul>
-                <p>DOWNLOAD THE WINZO APP</p>
-            
-        </div>  
-        <div class="download-section">
-            <h2>Download the Darrt App</h2>
-            <p>Click the button below to download the Darrt APK:</p>
-            <a href="Darrt.apk" class="download-button">Download APK</a>
-        </div>  
-            <footer>
-        <p>&copy; 2023 Darrt</p>
-    </footer>
-    </main>
-    
-    <script src="script.js"></script>
+    <div class="container">
+        <button class="image-button">
+            <img src="board.png" alt="SHOOT">
+        </button>
+    </div>
 </body>
-</html>  
+</html>

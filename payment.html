@@ -1,0 +1,595 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aviator Game</title>
+	<style>   
+
+* {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: 'Rubik'; 
+            
+        }
+
+        :root {
+            --maincolor: #83eeff;
+            --secondarycolor: #393e41;
+        }
+
+        #hero {
+            position: absolute;
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bottombar {
+            width: 100%;
+            height: 13%;
+            background-color: var(--secondarycolor);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            margin-top: 20%;
+            margin-bottom: 70%;
+            position: auto;
+        }
+
+        .items {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item2 {
+            width: 20%;
+            height: 90%;
+            margin-right: 5%;
+            margin-left: 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column wrap;
+        }
+
+        .lbl2 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button2 {
+            position: relative;
+            bottom: 0%;
+            width: 80%;
+            background: var(--secondarycolor);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: none;
+            transition: 0.2s;
+            border-radius: 50px;
+            flex-flow: column wrap;
+        }
+
+        .icon2 {
+            transition: 0.5s;
+            font-size: 200%;
+            color: var(--maincolor);
+            transition: 1s;
+            z-index: 1;
+            margin-top: 13%;
+            z-index: 1;
+        }
+
+        .btntxt2 {
+            position: relative;
+            top: 20%;
+            transition: all .2s;
+            color: var(--maincolor);
+            font-weight: 1000;
+            opacity: 0;
+        }
+
+       
+		body {
+			margin: 0;
+			padding-top: 100px;
+			background-color: #363958;
+		}
+		
+		.clock {
+			width: 100%;
+			background-color: #2f343a;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			position: fixed;
+			top: 0;
+			left: 0;
+			border-bottom: 1px solid #444;
+		}
+		
+		.clock h2 {
+			font-size: 24px;
+			margin: 0;
+		}
+		
+		.clock button {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		
+		.game-container {
+			width: 800px;
+			margin: 100px auto;
+			background-color: #2f343a;
+			padding: 20px;
+			border: 1px solid #444;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		
+		.game-header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			border-bottom: 1px solid #444;
+		}
+		
+		.game-view {
+			margin-bottom: 20px;
+		}
+		
+		.game-controls {
+			text-align: center;
+		}
+		
+		#start-button, #bet-button, #cashout-button {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			margin: 10px;
+		}
+		
+		#bet-amount {
+			width: 50px;
+			height: 30px;
+			margin: 10px;
+			padding: 10px;
+			font-size: 16px;
+		}
+		
+		#rocket-canvas {
+			border: 1px solid #444;
+		}
+		
+		.crash-history {
+			width: 100%;
+			background-color: #2f343a;
+			padding: 20px;
+			border: 1px solid #444;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			margin-top: 20px;
+		}
+		
+		.leaderboard {
+			width: 200px;
+			height: 300px;
+			background-color: #2f343a;
+			padding: 20px;
+			border: 1px solid #444;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			position: absolute;
+			top: 200px;
+			right: 50px;
+		}
+		
+		#account-area {
+			margin-top: 5%;
+		}
+		
+		.deposit {
+			background-color: slateblue;
+		}
+		
+		.withdraw {
+			background-color: lightsalmon;
+		}
+		
+		.balance {
+			background-color: tomato;
+		}
+		
+		.status {
+			margin: 0 20px;
+			color: white;
+			padding: 20px;
+			border-radius: 10px;
+		}
+		
+		.submit-area {
+			padding: 30px;
+			margin-top: 50px;
+			border-radius: 10px;
+			box-shadow: 5px 5px gray;
+			color: white;
+			background-color: royalblue;
+		}   
+
+        
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+    font-family:'Rubik'
+}
+
+:root{
+    --maincolor: #83eeff;
+    --secondarycolor: #393e41;
+}
+
+#hero{
+    position:absolute;
+    display:flex;
+    flex-flow: column wrap;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+
+.bottombar{
+    width:100%;
+    height:13%;
+    background-color:var(--secondarycolor);
+    border-radius: 20px;
+    display:flex;
+    align-items:center;
+    margin-top:50%;
+    margin-bottom:10%;
+}
+
+.items {
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.item{
+    width:20%;
+    height:60%;
+    margin-right:5%;
+    margin-left:5%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* navbar specific stylings */
+
+.lbl{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:none;
+}
+
+input[type=radio]{
+    display: none;
+}
+
+.button{
+    position:relative;
+    width:0%;
+    background:var(--maincolor);
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    overflow:none;
+    transition: .2s;
+    border-radius: 20px;
+}
+
+.fa-2x{
+    font-size: 220%;
+    color:var(--maincolor);
+    transition:1s;
+    z-index:1;
+}
+
+.btntxt{
+    position:relative;
+    right:10%;
+    opacity:0;
+    transition: .5s;
+    color:var(--secondarycolor);
+    font-weight:700;
+}
+
+input:checked ~ .button{
+    width:100%;
+    animation-delay: .2s;
+}
+
+input:checked ~ .button span{
+    position:relative;
+    right:0%;
+    opacity:1;
+    margin-left:10%;
+    animation-delay:.2s;
+}
+
+input:checked ~ .button i {
+    color: var(--secondarycolor);
+}
+
+#withborder {
+    border: 5px solid var(--maincolor);
+}
+
+.item2{
+    width:20%;
+    height:90%;
+    margin-right: 5%;
+    margin-left:5%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-flow:column wrap;
+}
+
+.lbl2 {
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.button2{
+    position:relative;
+    bottom:0%;
+    width:80%;
+    background:var(--secondarycolor);
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:none;
+    transition:0.2s;
+    border-radius:50px;
+    flex-flow:column wrap;
+}
+
+.icon2{
+    transition:0.5s;
+    font-size:200%;
+    color: var(--maincolor);
+    transition:1s;
+    z-index:1;
+    margin-top:13%;
+    z-index:1;
+}
+
+.btntxt2{
+    position:relative;
+    top:20%;
+    transition: all .2s;
+    color:var(--maincolor);
+    font-weight: 1000;
+    opacity: 0;
+}
+
+input:checked ~ .button2{
+    bottom:60%;
+    border: 5px solid var(--maincolor);
+}
+
+input:checked ~ .button2 span{
+    position:relative;
+    top:60%;
+    opacity:1;
+    animation-delay:.2s;
+}
+
+input:checked ~ .button2 i {
+    margin-top:10%;
+}      
+	</style>
+</head>
+<body>
+	
+	<div id="account-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 mb-3">
+					<div class="deposit status">
+						<h5>Deposit</h5>
+						<h2>$ <span id="current-deposit">00</span></h2>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-3">
+					<div class="withdraw status">
+						<h5>Withdraw</h5>
+						<h2>$ <span id="current-withdraw">00</span></h2>
+					</div>
+
+
+			</div>
+			<div class="col-lg-4 mb-3">
+				<div class="balance status">
+					<h5>Balance</h5>
+					<h2>$ <span id="current-balance">1240</span></h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="submit-area">
+					<h4>Deposit Amount</h4>
+					<input id="deposit-amount" type="text" class="form-control" placeholder="Enter deposit amount"><br>
+					<button id="deposit-btn" class="btn btn-success">Deposit</button>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="submit-area">
+					<h4>Withdraw Amount</h4>
+					<input id="withdraw-amount" type="text" class="form-control" placeholder="Enter withdraw amount"><br>
+					<button id="withdraw-btn" class="btn btn-success">Withdraw</button>
+				</div>
+			</div>
+		</div>
+	</div>  
+
+    <div class="bottombar" id="withborder">
+        <ul class="items">
+            <li class="item2">
+                <label class="lbl2" for="in4">
+                    <input id="in4" type="radio" checked="checked" name="group2">
+                    <div class="button2">
+                        <i id="usericon4" class="fa-solid fa-user fa-2x">
+                        </i>
+                        <span class="btntxt2">
+                            User
+                        </span>
+                    </div>
+                </label>
+            </li>
+            <li class="item2">
+                <label class="lbl2" for="in5">
+                    <input id="in5" type="radio" name="group2">
+                    <div class="button2">
+                        <i id="usericon5" class="fa-solid fa-house fa-2x">
+                        </i>
+                        <span class="btntxt2">
+                            Home
+                        </span>
+                    </div>
+                </label>
+            </li>
+            <li class="item2">
+                <label class="lbl2" for="in6">
+                    <input id="in6" type="radio" name="group2">
+                    <div class="button2">
+                        <i id="usericon6" class="fa-solid fa-gear fa-2x">
+                        </i>
+                        <span class="btntxt2">
+                            Settings
+                        </span>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </div>
+   </div> 
+</div>     
+
+<div class="bottombar" id="withborder">
+    <ul class="items">
+    <li class="item2">
+    <label class="lbl2" for="in4">
+    <input id="in4" type="radio" checked="checked" name="group2">
+    <div class="button2">
+    <i id="usericon4" class="fa-solid fa-user fa-2x"></i>
+    <span class="btntxt2"> User </span>
+    </div>
+    </label>
+    </li>
+    <li class="item2">
+    <label class="lbl2" for="in5">
+    <input id="in5" type="radio" name="group2">
+    <div class="button2">
+    <i id="usericon5" class="fa-solid fa-house fa-2x"></i>
+    <span class="btntxt2"> Home </span>
+    </div>
+    </label>
+    </li>
+    <li class="item2">
+    <label class="lbl2" for="in6">
+    <input id="in6" type="radio" name="group2">
+    <div class="button2">
+    <i id="usericon6" class="fa-solid fa-gear fa-2x"></i>
+    <span class="btntxt2"> Settings </span>
+    </div>
+    </label>
+    </li>
+    </ul>
+    </div>
+
+<script>
+	
+        //deposit button event handler
+        const deposit_btn = document.getElementById('deposit-btn');
+        deposit_btn.addEventListener('click', function(){
+
+            const depositStringToInt = getInputNumb("deposit-amount");
+
+            updateSpanTest("current-deposit", depositStringToInt);
+            updateSpanTest("current-balance", depositStringToInt);
+
+            //setting up the input field blank when clicked
+            document.getElementById('deposit-amount').value = "";
+
+        })
+
+         //withdraw button event handler
+         const withdraw_btn = document.getElementById('withdraw-btn');
+         withdraw_btn.addEventListener('click', function(){
+            const withdrawNumb = getInputNumb("withdraw-amount");
+
+            updateSpanTest("current-withdraw", withdrawNumb);
+            updateSpanTest("current-balance", -1 * withdrawNumb);
+            //setting up the input field blank when clicked
+            document.getElementById('withdraw-amount').value = "";
+        })
+
+        //function to parse string input to int
+        function getInputNumb(idName){
+            const amount = document.getElementById(idName).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+
+        function updateSpanTest(idName, addedNumber){
+            //x1.1 updating balance the same way
+            const current = document.getElementById(idName).innerText;
+            const currentStringToInt = parseFloat(current);
+
+            const total = currentStringToInt + addedNumber;
+
+            //x1.2 setting this value in balance
+            document.getElementById(idName).innerText = total;
+        }
+</script>
+
+</body>
+</html>

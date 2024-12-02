@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottom Bar Nav Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>  
+<style>/* General Stylings */
+
+    *{
+        margin:0;
+        padding:0;
+        list-style:none;
+        font-family:'Rubik'
+    }
+    
+    :root{
+        --maincolor: #83eeff;
+        --secondarycolor: #393e41;
+    }
+    
+    #hero{
+        position:absolute;
+        display:flex;
+        flex-flow: column wrap;
+        justify-content:center;
+        align-items:center;
+        width:100%;
+        height:100%;
+    }
+    
+    .bottombar{
+        width:100%;
+        height:13%;
+        background-color:var(--secondarycolor);
+        border-radius: 20px;
+        display:flex;
+        align-items:center;
+        margin-top:50%;
+        margin-bottom:10%;
+    }
+    
+    .items {
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    }
+    
+    .item{
+        width:20%;
+        height:60%;
+        margin-right:5%;
+        margin-left:5%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    
+    /* navbar specific stylings */
+    
+    .lbl{
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        overflow:none;
+    }
+    
+    input[type=radio]{
+        display: none;
+    }
+    
+    .button{
+        position:relative;
+        width:0%;
+        background:var(--maincolor);
+        height:100%;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        overflow:none;
+        transition: .2s;
+        border-radius: 20px;
+    }
+    
+    .fa-2x{
+        font-size: 220%;
+        color:var(--maincolor);
+        transition:1s;
+        z-index:1;
+    }
+    
+    .btntxt{
+        position:relative;
+        right:10%;
+        opacity:0;
+        transition: .5s;
+        color:var(--secondarycolor);
+        font-weight:700;
+    }
+    
+    input:checked ~ .button{
+        width:100%;
+        animation-delay: .2s;
+    }
+    
+    input:checked ~ .button span{
+        position:relative;
+        right:0%;
+        opacity:1;
+        margin-left:10%;
+        animation-delay:.2s;
+    }
+    
+    input:checked ~ .button i {
+        color: var(--secondarycolor);
+    }
+    
+    #withborder {
+        border: 5px solid var(--maincolor);
+    }
+    
+    .item2{
+        width:20%;
+        height:90%;
+        margin-right: 5%;
+        margin-left:5%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-flow:column wrap;
+    }
+    
+    .lbl2 {
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+    }
+    
+    .button2{
+        position:relative;
+        bottom:0%;
+        width:80%;
+        background:var(--secondarycolor);
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        overflow:none;
+        transition:0.2s;
+        border-radius:50px;
+        flex-flow:column wrap;
+    }
+    
+    .icon2{
+        transition:0.5s;
+        font-size:200%;
+        color: var(--maincolor);
+        transition:1s;
+        z-index:1;
+        margin-top:13%;
+        z-index:1;
+    }
+    
+    .btntxt2{
+        position:relative;
+        top:20%;
+        transition: all .2s;
+        color:var(--maincolor);
+        font-weight: 1000;
+        opacity: 0;
+    }
+    
+    input:checked ~ .button2{
+        bottom:60%;
+        border: 5px solid var(--maincolor);
+    }
+    
+    input:checked ~ .button2 span{
+        position:relative;
+        top:60%;
+        opacity:1;
+        animation-delay:.2s;
+    }
+    
+    input:checked ~ .button2 i {
+        margin-top:10%;
+    }</style>
+<body>
+   <div id="hero">
+    <!-- second navbar-->
+    <div class="bottombar" id="withborder">
+        <ul class="items">
+            <li class="item2">
+                <label class="lbl2" for="in4">
+                    <input id="in4" type="radio" checked="checked" name="group2">
+                    <div class="button2">
+                        <i id="usericon4" class="fa-solid fa-user fa-2x">
+                        </i>
+                        <span class="btntxt2">
+                            User
+                        </span>
+                    </div>
+                </label>
+            </li>
+            <li class="item2">
+                <label class="lbl2" for="in5">
+                    <input id="in5" type="radio" name="group2">
+                    <div class="button2">
+                        <i id="usericon5" class="fa-solid fa-house fa-2x">
+                        </i>
+                        <span class="btntxt2">
+                            Home
+                        </span>
+                    </div>
+                </label>
+            </li>
+            <li class="item2">
+                <label class="lbl2" for="in6">
+                    <input id="in6" type="radio" name="group2">
+                    <div class="button2">
+                        <i id="usericon6" class="fa-solid fa-gear fa-2x">
+                        </i>
+                        <span class="btntxt2">
+                            Settings
+                        </span>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </div>
+   </div> 
+</body>
+</html>

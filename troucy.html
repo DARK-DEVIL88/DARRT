@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage with Bottom Navigation Bar</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #content {
+            flex: 1;
+            padding: 2rem;
+            background-color: #f4f4f4;
+        }
+
+        .bottom-navbar {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bottom-navbar ul {
+            list-style: none;
+            display: flex;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bottom-navbar ul li {
+            margin: 0 1rem;
+        }
+
+        .bottom-navbar ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .bottom-navbar ul li a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content">
+            <!-- Load dd.html initially -->
+        </div>
+        <nav class="bottom-navbar">
+            <ul>
+                <li><a href="#" data-content="Home">Home</a></li>
+                <li><a href="#" data-content="About">About</a></li>
+                <li><a href="#" data-content="Contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.bottom-navbar a');
+            const content = document.getElementById('content');
+
+            // Load dd.html initially
+            loadContent('Home');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const page = event.target.getAttribute('data-content');
+                    loadContent(page);
+                });
+            });
+
+            function loadContent(page) {
+                switch (page) {
+                    case 'Home':
+                        content.innerHTML = '';
+                        const iframe = document.createElement('iframe');
+                        iframe.src = 'dd.html';
+                        iframe.frameBorder = '0';
+                        iframe.width = '100%';
+                        iframe.height = '100%';
+                        content.appendChild(iframe);
+                        break;
+                    case 'About':
+                        content.innerHTML = '';
+                        const iframe2 = document.createElement('iframe');
+                        iframe2.src = 'wallet.html';
+                        iframe2.frameBorder = '0';
+                        iframe2.width = '100%';
+                        iframe2.height = '100%';
+                        content.appendChild(iframe2);
+                        break;
+                    case 'Contact':
+                        content.innerHTML = '';
+                        const iframe3 = document.createElement('iframe');
+                        iframe3.src = 'feedback.html';
+                        iframe3.frameBorder = '0';
+                        iframe3.width = '100%';
+                        iframe3.height = '100%';
+                        content.appendChild(iframe3);
+                        break;
+                    default:
+                        content.innerHTML = `
+                            <h2>Welcome to the Home Page</h2>
+                            <p>This is the content for the home page.</p>
+                        `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

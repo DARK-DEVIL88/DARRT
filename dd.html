@@ -1,0 +1,260 @@
+[10:21 am, 23/11/2024] Meta AI: <!DOCTYPE html>
+<html>
+<head>
+	<title>Aviator Game</title>
+	<style>
+		body {
+			background-color: #1a1d23;
+			font-family: Arial, sans-serif;
+		}
+		
+		.clock {
+			width: 100%;
+			background-color: #2f343a;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			position: fixed;
+			top: 0;
+			left: 0;
+			border-bottom: 1px solid #444;
+		}
+		
+		.clock h2 {
+			font-size: 24px;
+			margin: 0;
+		}
+		
+		.clock button {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		
+		.game-container {
+			width: 800px;
+			margin: 100px auto;
+			background-color: #2f343a;
+			padding: 20px;
+			border: 1px solid #444;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		
+		.game-header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			border-bottom: 1px solid #444;
+		}
+		
+		.game-view {
+			margin-bottom: 20px;
+		}
+		
+		.game-controls {
+			text-align: center;
+		}
+		
+		#start-button, #bet-button, #cashout-button {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			margin: 10px;
+		}
+		
+		#bet-amount {
+			width: 50px;
+			height: 30px;
+			margin: 10px;
+			padding: 10px;
+			font-size: 16px;
+		}
+		
+		#rocket-canvas {
+			border: 1px solid #444;
+		}
+		
+		.crash-history {
+			width: 100%;
+			background-color: #2f343a;
+			padding: 20px;
+			border: 1px solid #444;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			margin-top: 20px;
+		}
+		
+		.leaderboard {
+			width: 200px;
+			height: 300px;
+			background-color: #2f343a;
+			padding: 20px;
+			border: 1px solid #444;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			position: absolute;
+			top: 200px;
+			left: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="clock">
+		<h2 id="clock"></h2>
+		<button id="back-button" onclick="goBack()">Back</button>
+	</div>
+	<div class="crash-history">
+		<h2>Crash History</h2>
+		<ul id="crash-history-list"></ul>
+	</div>
+	<div class="game-container">
+		<div class="game-header">
+			<h1>Aviator Game</h1>
+		</div>
+		<div class="game-view">
+			<canvas id="rocket-canvas" width="400" height="400"></canvas>
+			<p>Multiplier: <span id="multiplier" style="color: #4CAF50; font-size: 24px;">1.00</span></p>
+			<p>Crash Point: <span id="crash-point" style="color: #4CAF50; font-size: 24px;">?</span></p>
+			<p>Balance: <span id="balance" style="color: #4CAF50; font-size: 24px;">1000</span></p>
+			<p>Bet: <span id="bet" style="color: #4CAF50; font-size: 24px;">0</span></p>
+		</div>
+		<div class="game-controls">
+			<button id="start-button">Start Game</button>
+			<button id="bet-button">Place Bet</button>
+			<button id="cashout-button">Cash Out</button>
+			
+
+
+		id="bet-amount" type="number" value="10">
+	</div>
+</div>
+<div class="leaderboard">
+	<h2>Leaderboard</h2>
+	<ul id="leaderboard-list"></ul>
+</div>
+
+<script>
+	let balance = 1000;
+	let currentBet = 0;
+	let multiplier = 1.00;
+	let crashPoint = Math.random() * 100 + 1;
+	let gameRunning = false;
+	let intervalId;
+	let rocketX = 0;
+	let rocketY = 380;
+	let rocketSpeedX = 2;
+	let rocketSpeedY = -2;
+	let rocketCanvas;
+	let rocketContext;
+	let leaderboard = [];
+	let crashHistory = [];
+	
+	document.getElementById("start-button").addEventListener("click", startGame);
+	document.getElementById("bet-button").addEventListener("click", placeBet);
+	document.getElementById("cashout-button").addEventListener("click", cashOut);
+	
+	function startGame() {
+		gameRunning = true;
+		multiplier = 1.00;
+		crashPoint = Math.random() * 100 + 1;
+		rocketX = 0;
+		rocketY = 380;
+		rocketSpeedX = 2;
+		rocketSpeedY = -2;
+		rocketCanvas = document.getElementById("rocket-canvas");
+		rocketContext = rocketCanvas.getContext("2d");
+		updateGameView();
+		intervalId = setInterval(updateGame, 16);
+	}
+	
+	function goBack() {
+		window.history.back();
+	}
+	
+	function placeBet() {
+		let betAmount = parseInt(document.getElementById("bet-amount").value);
+		if (balance >= betAmount) {
+			currentBet = betAmount;
+			updateGameView();
+		}
+	}
+	
+	function cashOut() {
+		if (gameRunning && currentBet > 0) {
+			let winnings = currentBet * multiplier;
+			balance += winnings;
+			currentBet = 0;
+			updateGameView();
+		}
+	}
+	
+	function updateGame() {
+		if (gameRunning) {
+			rocketX += rocketSpeedX;
+			rocketY += rocketSpeedY;
+			if (rocketX > 400) {
+				rocketX = 0;
+			}
+			if (rocketY < 20) {
+				rocketY = 20;
+			}
+			rocketContext.clearRect(0, 0, 400, 400);
+			rocketContext.fillStyle = "white";
+			rocketContext.fillRect(rocketX, rocketY, 20, 20);
+			multiplier += 0.01;
+			if (multiplier >= crashPoint) {
+				gameRunning = false;
+				updateGameView();
+				crashHistory.push(`Crashed at ${crashPoint.toFixed(2)}`);
+				updateCrashHistory();
+				alert("Game Over! The multiplier crashed at " + crashPoint.toFixed(2));
+			}
+			updateGameView();
+		}
+	}
+	
+	function updateGameView() {
+		document.getElementById("multiplier").innerText = multiplier.toFixed(2);
+		document.getElementById("crash-point").innerText = crashPoint.toFixed(2);
+		document.getElementById("balance").innerText = balance.toFixed(2);
+		document.getElementById("bet").innerText = currentBet.toFixed(2);
+	}
+	
+	function updateCrashHistory() {
+		let crashHistoryList = document.getElementById("crash-history-list");
+		crashHistoryList.innerHTML = "";
+		for (let i = 0; i < crashHistory.length; i++) {
+			let listItem = document.createElement("LI");
+			listItem.innerText = crashHistory[i];
+			crashHistoryList.appendChild(listItem);
+		}
+	}
+	
+	function updateLeaderboard() {
+		let leaderboardList = document.getElementById("leaderboard-list");
+		leaderboardList.innerHTML = "";
+		for (let i = 0; i < leaderboard.length; i++) {
+			let listItem = document.createElement("LI");
+			listItem.innerText = `${leaderboard[i].name}: ${leaderboard[i].score}`;
+			leaderboardList.appendChild(listItem);
+		}
+	}
+	
+	setInterval(function() {
+		let date = new Date();
+		let hours = date.getHours();
+		let minutes = date.getMinutes();
+		let seconds = date.getSeconds();
+		let clockString = `${hours}:${minutes}:${seconds}`;
+		document.getElementById("clock").innerText = clockString;
+	}, 1000);
+</script>
+
+</body>
+</html>

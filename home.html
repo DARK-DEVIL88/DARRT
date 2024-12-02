@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            background: linear-gradient(to bottom right, #120420, #06080c);
             color: white;
         }
 
@@ -46,9 +46,15 @@
 </head>
 <body>
     <div class="container">
-        <button class="image-button">
-            <img src="board.png" alt="SHOOT">
+        <button class="image-button" onclick="redirectToTroucy()">
+            <img src="board.png" alt="SHOOT" text="shoot">
         </button>
     </div>
+
+    <script>
+        function redirectToTroucy() {
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styling for the button */
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Initial styling for the popup container */
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-radius: 10px;
+        }
+
+        /* Styling for the text inside the popup */
+        .popup-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the close button */
+        .close-button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .close-button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Styling for the input field */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Styling for the submit button */
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+        }
+
+        /* General styling for the container */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the wallet info section */
+        .wallet-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+ margin-bottom: 20px;
+        }
+
+        /* Styling for the actions section */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Styling for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .close-modal:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wallet Page</h1>
+        <div class="wallet-info">
+            <h2>Your Wallet Details</h2>
+            <p>Welcome to your wallet page. Here you can manage your funds and transactions.</p>
+            <h3>Current Balance</h3>
+            <p>$1000.00</p>
+            <h3>Recent Transactions</h3>
+            <ul>
+                <li><span>Transaction 1: $200.00</span> <time>2023-10-01</time></li>
+                <li><span>Transaction 2: $300.00</span> <time>2023-10-02</time></li>
+                <li><span>Transaction 3: $500.00</span> <time>2023-10-03</time></li>
+            </ul>
+        </div>
+        <div class="actions">
+            <h2>Actions</h2>
+            <button class="btn btn-primary" onclick="showAddFundsPopup()">Add Funds</button>
+            <button class="btn btn-secondary" id="withdrawFundsButton" onclick="showWithdrawPopup()">Withdraw Funds</button>
+            <button class="btn btn-secondary" onclick="viewHistory()">View Transaction History</button>
+        </div>
+    </div>
+
+    <!-- Add Funds Popup Container -->
+    <div id="addFundsPopup" class="popup-container">
+        <span class="popup-text">Enter the amount to add</span>
+        <input type="number" class="input-field" placeholder="Amount" id="addFundsInput" required>
+        <button class="btn btn-primary submit-button" onclick="addFunds()">Add Funds</button>
+        <button class="close-button" onclick="closeAddFundsPopup()">Close</button>
+    </div>
+
+    <!-- Withdraw Popup Container -->
+    <div id="withdrawPopup" class="popup-container">
+        <textarea id="editable-text" class="input-field" placeholder="Enter the amount to withdraw"></textarea>
+        <button class="btn btn-secondary close-button" onclick="closeWithdrawPopup()">Close</button>
+    </div>
+
+    <!-- Transaction History Modal -->
+    <div id="transactionHistoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeTransactionHistoryModal()">&times;</span>
+            <h2>Transaction History</h2>
+            <ul id="transactionHistoryList">
+                <li><span>Transaction 1: $200.00</span> <time>2023-10-01</time></li>
+                <li><span>Transaction 2: $300.00</span> <time>2023-10-02</time></li>
+                <li><span>Transaction 3: $500.00</span> <time>2023-10-03</time></li>
+                <li><span>Transaction 4: $150.00</span> <time>2023-10-04</time></li>
+                <li><span>Transaction 5: $75.00</span> <time>2023-10-05</time></li>
+                <li><span>Transaction 6: $400.00</span> <time>2023-10-06</time></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showAddFundsPopup() {
+            document.getElementById('addFundsPopup').style.display = "block";
+        }
+
+        function showWithdrawPopup() {
+            document.getElementById('withdrawPopup').style.display = "block";
+        }
+
+        function closeAddFundsPopup() {
+            document.getElementById('addFundsPopup').style.display = "none";
+        }
+
+        function closeWithdrawPopup() {
+            document.getElementById('withdrawPopup').style.display = "none";
+        }
+
+        function addFunds() {
+            var amount = document.getElementById('addFundsInput').value;
+            if (amount) {
+                alert('Functionality to add funds is not yet implemented. Amount entered: $' + amount);
+                closeAddFundsPopup();
+            } else {
+                alert('Please enter a valid amount.');
+            }
+        }
+
+        function viewHistory() {
+            document.getElementById('transactionHistoryModal').style.display = "block";
+        }
+
+        function closeTransactionHistoryModal() {
+            document.getElementById('transactionHistoryModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var addFundsPopup = document.getElementById('addFundsPopup');
+            var withdrawPopup = document.getElementById('withdrawPopup');
+            var transactionHistoryModal = document.getElementById('transactionHistoryModal');
+            if (event.target == addFundsPopup || event.target == withdrawPopup || event.target == transactionHistoryModal) {
+                addFundsPopup.style.display = "none";
+                withdrawPopup.style.display = "none";
+                transactionHistoryModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
